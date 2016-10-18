@@ -18,12 +18,21 @@ import ar.edu.undav.semillero.domain.entity.Interview;
 @RunWith(SpringRunner.class)
 public class InterviewRepositoryTest {
 	
+	@Autowired
+    private GraduatedRepository graduatedRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+    
+    @Autowired
     private InterviewRepository interviewRepository;
-
+    
     @Test
     public void testSave() {
+    	Graduated graduated = new Graduated("Santi");
+        Company company = new Company("company", "jorge");
+        companyRepository.save(company);
+        graduatedRepository.save(graduated);
         Interview entrevista = new Interview(new Graduated(), new Company(), new Date() ,"Hay que contratarlo al toque");
         interviewRepository.save(entrevista);
     }

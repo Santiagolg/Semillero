@@ -21,6 +21,9 @@ public class Graduated {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "graduated")
     private List<Interview> interviews = new ArrayList<>();
+    
+    @ManyToOne
+    private Nodo nodo;
 
     public Graduated() {
     }
@@ -41,7 +44,11 @@ public class Graduated {
         this.interviews.add(interview);
     }
 
-    @Override
+    public void setNodo(Nodo nodo) {
+		this.nodo = nodo;
+	}
+
+	@Override
     public String toString() {
         return "Graduated{" +
                 "id=" + id +

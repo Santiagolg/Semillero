@@ -13,17 +13,18 @@ import ar.edu.undav.semillero.domain.repository.GraduatedRepository;
 
 @RestController
 @EnableAutoConfiguration
+@RequestMapping(value="/Graduated")
 public class GraduatedController {
 
    @Autowired
     private GraduatedRepository graduatedRepository;
 	
     
-	@RequestMapping("/saveGraduated")
-    String saveGraduated() {
-    	Graduated graduated = new Graduated("Pichon");
+	@RequestMapping(method=RequestMethod.POST)
+    Graduated saveGraduated() {
+    	Graduated graduated = new Graduated("Santi");
         graduatedRepository.save(graduated);
-        return "Graduado agregado";
+        return graduated;
     }
 
     

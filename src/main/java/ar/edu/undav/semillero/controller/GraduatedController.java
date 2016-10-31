@@ -1,32 +1,27 @@
 package ar.edu.undav.semillero.controller;
-import org.springframework.beans.factory.annotation.Autowired;
-/******************************************************
- * Al runnear esto, si entro a localhost:8080/saveGraduated guardo un graduado en la DB semillero
- *****************************************************/
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-
 import ar.edu.undav.semillero.domain.entity.Graduated;
 import ar.edu.undav.semillero.domain.repository.GraduatedRepository;
+import ar.edu.undav.semillero.services.GraduatedService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@EnableAutoConfiguration
-@RequestMapping(value="/Graduated")
+@RequestMapping(value="/graduated")
 public class GraduatedController {
 
    @Autowired
     private GraduatedRepository graduatedRepository;
 	
     
-	@RequestMapping(method=RequestMethod.POST)
-    Graduated saveGraduated() {
-    	Graduated graduated = new Graduated("Santi");
+	@RequestMapping(value="", method=RequestMethod.POST)
+    public String saveGraduated(@RequestParam(value="name")String name){
+    	Graduated graduated = new Graduated(name);
         graduatedRepository.save(graduated);
-        return graduated;
+        return "Graduado: "+name+" agregado";
     }
 
-    
-
+   
 }
